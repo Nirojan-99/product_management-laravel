@@ -29,3 +29,13 @@ Route::get('/editProduct', function () {
 Route::get('/categories', function () {
     return view('categories');
 });
+
+
+Route::get('/newCategory', function () {
+    return view('new_category');
+});
+
+
+Route::get('/editCategory', function () {
+    return view('edit_category');
+});

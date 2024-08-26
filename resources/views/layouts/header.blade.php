@@ -17,20 +17,20 @@
 <body>
     <header class="w-100 " style="background-color: #2C1708;">
         <nav class="navbar navbar-expand-lg navbar-light   container p-0">
-            <a class="navbar-brand" href="#"><img src="{{URL('images/logo.png')}}" /></a>
+            <a class="navbar-brand" href="/"><img src="{{URL('images/logo.png')}}" /></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon" style="color: #fff;"></span>
             </button>
             <div class="collapse navbar-collapse text-center" id="navbarNav">
                 <ul class="navbar-nav ml-auto ">
                     <li class="nav-item mr-3 ">
-                        <a class="nav-link" style="color:#fff" href="#">Order Management</a>
+                        <a class="nav-link" style="color:#fff" href="/orders">Order Management</a>
                     </li>
                     <li class="nav-item mr-3 ">
-                        <a class="nav-link" style="color:#fff" href="#">Product Management</a>
+                        <a class="nav-link" style="color:#fff" href="/">Product Management</a>
                     </li>
                     <li class="nav-item mr-3 ">
-                        <a class="nav-link" style="color:#fff" href="#">Slider Management</a>
+                        <a class="nav-link" style="color:#fff" href="/sliders">Slider Management</a>
                     </li>
                 </ul>
             </div>
