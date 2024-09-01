@@ -25,9 +25,9 @@
                 </div>
                 <div class="col-7 ">Categories Name</div>
             </div>
-            @for ($i = 0; $i < 12; $i++)
-                @include('layouts.category', ['index'=> $i])
-                @endfor
+            @foreach ($categories as $category)
+            @include('layouts.category', ['data'=> $category])
+            @endforeach
         </div>
     </section>
 

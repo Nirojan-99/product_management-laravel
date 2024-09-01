@@ -1,20 +1,25 @@
 <div>
 
-    <div class="row border-bottom  w-100 ">
-        @yield("index")
+    <div class="row border-bottom  w-100 py-2">
+        @yield("data")
         <div class="col-5 ">
-            <img src="{{URL('images/cate.png')}}" alt="" style="width: 120px;">
+            <img src="{{ asset('images/' . $data->image) }}" alt="" style="width: 90px;height: 90px;">
         </div>
         <div class="row col-7 align-items-center text-left w-100 ">
-            <div class="col-9 " style="font-weight: 700;">Food</div>
+            <div class="col-9 " style="font-weight: 700;">{{ $data->name }}</div>
             <div class="col-3 ">
                 <div class=" row align-items-center justify-content-between ">
                     <button class="col-6" style="outline: 0;border: 0;background-color: transparent;">
-                        <a href="/editCategory"><img src="{{URL('images/edit.png')}}" alt="" class="" style="width: 20px;height: 20px;"></a>
+                        <a href="{{route('categories.edit', ['category' => $data])}}"><img src="{{URL('images/edit.png')}}" alt="" class="" style="width: 20px;height: 20px;"></a>
                     </button>
-                    <button class="col-6" style="outline: 0;border: 0;background-color: transparent;" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#confirmationModal">
-                        <img src="{{URL('images/delete.png')}}" alt="" class="" style="width: 20px;height: 20px;">
-                    </button>
+                    <form method="post" action="{{route('categories.destroy', ['id' => $data->category_id])}}">
+                        @csrf
+                        @method('delete')
+                        <button class="col-6" style="outline: 0;border: 0;background-color: transparent;" type="submit" class="btn btn-primary" >
+                            <img src="{{URL('images/delete.png')}}" alt="" class="" style="width: 20px;height: 20px;">
+                        </button>
+                    </form>
+
                 </div>
             </div>
         </div>

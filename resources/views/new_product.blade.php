@@ -1,46 +1,46 @@
 @extends("layouts.layout")
 
-@section("title","products")
+@section("title","new product")
 
 @section("content")
 <div>
 
     <div class="container mt-5">
-        <form class="w-sm-50 m-auto w-xs-100">
+        <form class="w-sm-50 m-auto w-xs-100" method="POST" action="{{ route('products.store') }}" enctype="multipart/form-data">
+            @csrf
             <div class="form-group">
                 <label for="productName">Name:</label>
-                <input type="text" class="form-control" id="productName" placeholder="Enter product name">
+                <input name="name" type="text" class="form-control" id="productName" placeholder="Enter product name">
             </div>
 
             <div class="form-group">
                 <label for="modelNumber">Model Number:</label>
-                <input type="text" class="form-control" id="modelNumber" placeholder="Enter model number">
+                <input name="model_number" type="text" class="form-control" id="modelNumber" placeholder="Enter model number">
             </div>
 
             <div class="form-group">
                 <label for="categories">Categories:</label>
-                <select class="form-control" id="categories">
-                    <!-- Options can be added here -->
-                    <option value="">computer</option>
-                    <option value="">vegetable</option>
-                    <option value="">food</option>
-                    <option value="">drink</option>
+                <select class="form-control" id="categories" name="category">
+                    <option value=" ">select</option>
+                    @foreach ($categories as $category)
+                    <option value="{{$category->name}}">{{$category->name}}</option>
+                    @endforeach
                 </select>
             </div>
-
+            <input hidden name="availability" value="1">
             <div class="form-group">
                 <label for="productDetails">Product Details:</label>
-                <textarea class="form-control" id="productDetails" rows="3" placeholder="Enter product details"></textarea>
+                <textarea class="form-control" name="product_details" id="productDetails" rows="3" placeholder="Enter product details"></textarea>
             </div>
 
             <div class="form-group">
                 <label for="howToUse">How to Use:</label>
-                <textarea class="form-control" id="howToUse" rows="3" placeholder="Enter usage instructions"></textarea>
+                <textarea name="how_to_use" class="form-control" id="howToUse" rows="3" placeholder="Enter usage instructions"></textarea>
             </div>
 
             <div class="form-group">
                 <label for="howToUse">Shipping Details</label>
-                <textarea class="form-control" id="shippingDetails" rows="3" placeholder="Enter Shipping Details"></textarea>
+                <textarea name="shipping_details" class="form-control" id="shippingDetails" rows="3" placeholder="Enter Shipping Details"></textarea>
             </div>
 
             <div class="form-group">
@@ -52,13 +52,13 @@
                 <div id="formContainer">
                     <div class="row mb-3">
                         <div class="col-4">
-                            <input type="text" class="form-control" id="price" placeholder="Price">
+                            <input name="pricing[0][price]" type="text" class="form-control" id="price" placeholder="Price">
                         </div>
                         <div class="col-4">
-                            <input type="text" class="form-control" id="weight" placeholder="Weight">
+                            <input type="text" name="pricing[0][weight]" class="form-control" id="weight" placeholder="Weight">
                         </div>
                         <div class="col-4">
-                            <input type="text" class="form-control" id="quantity" placeholder="Quantity of a box">
+                            <input type="text" name="pricing[0][quantity]" class="form-control" id="quantity" placeholder="Quantity of a box">
                         </div>
                     </div>
                 </div>
@@ -72,28 +72,27 @@
                 <div class="row  m-auto gap-3  text-center">
                     <label for="imageInput" type=button class="g-col-6 border d-flex align-items-center justify-content-center mr-2" style="height: 240px; width: 240px;">
                         <img id="imagePreview" src="{{URL('images/plus.png')}}" alt="" style="width: 20px;">
-                        <input type="file" class="form-control" id="imageInput" accept="image/*" hidden>
+                        <input name="images[0]" type="file" class="form-control" id="imageInput" accept="image/*" hidden>
                     </label>
                     <div class="gap-3 g-col-6 d-flex flex-column justify-content-between" style="height: 240px;">
                         <label for="imageInput1" type=button class=" g-col-6 d-flex align-items-center justify-content-center border" style="height: 80px; width: 80px;">
                             <img id="imagePreview1" src="{{URL('images/plus.png')}}" alt="" style="width: 20px;">
-                            <input type="file" class="form-control" id="imageInput1" accept="image/*" hidden>
+                            <input name="images[1]" type="file" class="form-control" id="imageInput1" accept="image/*" hidden>
                         </label>
                         <label for="imageInput2" type=button class="g-col-6 d-flex align-items-center justify-content-center border" style="height: 80px; width: 80px;">
                             <img id="imagePreview2" src="{{URL('images/plus.png')}}" alt="" style="width: 20px;">
-                            <input type="file" class="form-control" id="imageInput2" accept="image/*" hidden>
+                            <input name="images[2]" type="file" class="form-control" id="imageInput2" accept="image/*" hidden>
                         </label>
                         <label for="imageInput3" type=button class="g-col-6 d-flex align-items-center justify-content-center border" style="height: 80px; width: 80px;">
                             <img id="imagePreview3" src="{{URL('images/plus.png')}}" alt="" style="width: 20px;">
-                            <input type="file" class="form-control" id="imageInput3" accept="image/*" hidden>
+                            <input name="images[3]" type="file" class="form-control" id="imageInput3" accept="image/*" hidden>
                         </label>
                     </div>
                 </div>
             </div>
 
-            <button class="btn btn-primary text-center  w-100 my-4" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#confirmationModal">Save</button>
+            <input class="btn btn-primary text-center  w-100 my-4" type="submit" type="button" class="btn btn-primary" value="Save"></input>
 
-            <!-- Confirmation Modal -->
             <div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -114,22 +113,24 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
     <script>
+        let index = 1;
         document.getElementById('addRowButton').addEventListener('click', function(event) {
             event.preventDefault();
             var newRow = `
                 <div class="row mb-3">
                     <div class="col-4">
-                        <input type="text" class="form-control" placeholder="Price">
+                        <input name="pricing[${index}][price]" type="text" class="form-control" placeholder="Price">
                     </div>
                     <div class="col-4">
-                        <input type="text" class="form-control" placeholder="Weight">
+                        <input name="pricing[${index}][weight]" type="text" class="form-control" placeholder="Weight">
                     </div>
                     <div class="col-4">
-                        <input type="text" class="form-control" placeholder="Qty.. box">
+                        <input name="pricing[${index}][quantity]" type="text" class="form-control" placeholder="Qty.. box">
                     </div>
                 </div>
             `;
             document.getElementById('formContainer').insertAdjacentHTML('beforeend', newRow);
+            index++;
         });
     </script>
 

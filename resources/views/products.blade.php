@@ -20,14 +20,14 @@
 
     <section class="w-100 ">
         <div class="container m-auto row  gap-3">
-            @for ($i = 0; $i < 12; $i++)
-                @include('layouts.product', ['title'=> 'data'])
-                @endfor
+            @foreach ($products as $product)
+            @include('layouts.product', ['data'=> $product])
+            @endforeach
         </div>
     </section>
 
     <div class="container  mt-5 row m-auto">
-    
+
         <nav class="m-auto text-center">
             <ul class="pagination  ">
                 <li class="page-item">
@@ -36,10 +36,10 @@
                     </a>
                 </li>
                 <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <!-- <li class="page-item"><a class="page-link" href="#">2</a></li> -->
+                <!-- <li class="page-item"><a class="page-link" href="#">3</a></li>
                 <li class="page-item"><a class="page-link" href="#">4</a></li>
-                <li class="page-item"><a class="page-link" href="#">5</a></li>
+                <li class="page-item"><a class="page-link" href="#">5</a></li> -->
                 <li class="page-item">
                     <a class="page-link" href="#" aria-label="Next">
                         <span aria-hidden="true">&raquo;</span>

@@ -1,23 +1,28 @@
 <div class="col-md-4 col-xs-12 mt-4">
-    <div class="g-col-6 shadow-lg mb-md-5 mb-xs-0 bg-body-tertiary rounded ">
+    <div class="g-col-6 shadow-lg mb-md-2 mb-xs-0 bg-body-tertiary rounded ">
         <div class="row p-3">
-            <img src="{{URL('images/prod.png')}}" alt="" class="col-4">
+            <img src="{{ asset('images/' . $data->images[0]) }}" alt="" class="col-4">
             <div class="col-6 ">
-                <div style="font-size: 14px;font-weight: 700;">Laptop</div>
-                <div style="font-size: 12px;">Laptops are designed to be portable computers. They are smaller and lighter than desktops.</div>
-                <div style="font-size: 14px;font-weight: 700;">RS 100.00</div>
+                <div style="font-size: 14px;font-weight: 700;">{{$data->name}}</div>
+                <div style="font-size: 12px;">{{$data->product_details}}</div>
+                <div style="font-size: 14px;font-weight: 700;">RS {{$data->pricing[0]['price']}}</div>
             </div>
             <div class="col-2">
                 <button class="mb-3" style="outline: 0;border: 0;background-color: transparent;">
-                    <a href="/editProduct"><img src="{{URL('images/edit.png')}}" alt="" class="" style="width: 20px;height: 20px;"></a>
+                <a href="{{route('products.edit', ['product' => $data])}}"><img src="{{URL('images/edit.png')}}" alt="" class="" style="width: 20px;height: 20px;"></a>
                 </button>
-                <button class="" style="outline: 0;border: 0;background-color: transparent;" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#confirmationModal">
-                    <img src="{{URL('images/delete.png')}}" alt="" class="" style="width: 20px;height: 20px;">
-                </button>
+                <form method="post" action="{{route('products.destroy', ['id' => '1'])}}">
+                    @csrf
+                    @method('delete')
+                    <button class="col-6" style="outline: 0;border: 0;background-color: transparent;" type="submit" class="btn btn-primary">
+                        <img src="{{URL('images/delete.png')}}" alt="" class="" style="width: 20px;height: 20px;">
+                    </button>
+                </form>
+
             </div>
         </div>
     </div>
-  
+
     <div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
